@@ -4,7 +4,6 @@ import Quick
 import Nimble
 import ZenCopy
 
-
 class ZenCopyTests: QuickSpec {
     override func spec() {
         let copyManager = ZenCopy.manager
@@ -20,7 +19,7 @@ class ZenCopyTests: QuickSpec {
                 "test6": ["$0 blah blah $1"]
             ]
         }
-        
+
         config.addCopy("en", prefix: "profile") {
             return [
                 "title": ["Profile"],
