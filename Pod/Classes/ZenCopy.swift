@@ -1,14 +1,13 @@
 import Foundation
 
 public class ZenCopy {
-    public static let manager = Manager()
-    public  class Manager {
+    public class Config {
         // ZenCopy will always check the languages in default order. If none pass, it will print the key.
         // It is a good idea to update this array such that the device locale is at index 0, and your default localse
         // is at the last index, though not necessary.
         public  var languages = ["en"]
         
-        // [language:[key:value]] 
+        // [language:[key:value]]
         // e.g. copy["en"]["profile.title"] = ["Hello world!"]
         // e.g. copy["en"]["profile.title"] = ["Hello ", "world!".style("token")]
         public var copy = [String:[String:[CopyComponent]]]()
@@ -18,9 +17,19 @@ public class ZenCopy {
         //      ZenCopy.manager.styles.append("bindleGreen", Style(color: ..., font: nil)
         public var styles = [String:Style]()
         
-        // applying a style only updates the non-nil values. In the order the styles are applied.
         public init() {
             
+        }
+    }
+    
+    public static let manager = Manager(config: Config())
+    
+    public class Manager {
+        public var config: Config
+        
+        // applying a style only updates the non-nil values. In the order the styles are applied.
+        public init(config: Config) {
+            self.config = config
         }
         
         public func string(copyComponents: [CopyComponent], args: [String] = []) -> String {
@@ -41,7 +50,7 @@ public class ZenCopy {
         // This will ignore style
         public func string(key key: String, args: [String] = []) -> String? {            
             // TODO: languages
-            if let copyComponents = copy["en"]?[key] {
+            if let copyComponents = config.copy["en"]?[key] {
                 return string(copyComponents, args: args)
             } else {
                 return nil
