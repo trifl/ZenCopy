@@ -1,6 +1,7 @@
 public class CopyComponent: StringLiteralConvertible {
     public var value: String
     public var style: Style?
+    public var styleName: String?
     
     public required init(stringLiteral value: String) {
         self.value = value
@@ -14,17 +15,16 @@ public class CopyComponent: StringLiteralConvertible {
         self.value = value
     }
     
-    public init(value: String, style: Style? = nil) {
+    public init(value: String, style: Style? = nil, styleName: String? = nil) {
         self.value = value
         self.style = style
+        self.styleName = styleName
     }
 }
 
 public extension String {
     func style(styleName: String) -> CopyComponent {
-        let style: Style? = nil
-        // TODO: find style
-        return self.style(style)
+        return CopyComponent(value: self, styleName: styleName)
     }
     
     func style(style: Style?) -> CopyComponent {

@@ -87,7 +87,15 @@ public class Manager {
             for (index, arg) in args.enumerate() {
                 value = value.stringByReplacingOccurrencesOfString("$\(index)", withString: arg)
             }
-            let attributes = attributesForStyle(component.style)
+            
+            var style = component.style
+            if style == nil {
+                if let styleName = component.styleName {
+                    style = config.styles[styleName]
+                }
+            }
+
+            let attributes = attributesForStyle(style)
             let attributedValue = NSAttributedString(string: value, attributes: attributes)
             string.appendAttributedString(attributedValue)
         }
