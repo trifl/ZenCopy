@@ -32,6 +32,8 @@
 		3E78A1C052CD01C05867C853A7D555FE /* Pods-ZenCopy_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C1D4DD72B2DE3FCB1AC42264A98873F4 /* Pods-ZenCopy_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		407E80011C76AC8F00A9A5CB /* CopyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407E80001C76AC8F00A9A5CB /* CopyComponent.swift */; };
 		40C8F6AC1C76AC3500DD750D /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8F6AB1C76AC3500DD750D /* Style.swift */; };
+		40ED95791C77BD9500BBA1C6 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED95771C77BD8E00BBA1C6 /* Config.swift */; };
+		40ED957D1C77BEDF00BBA1C6 /* NSMutableAttributedString+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED957B1C77BE8A00BBA1C6 /* NSMutableAttributedString+Additions.swift */; };
 		4135FFD5E2D1600361ABC48C7B50237B /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF695047E0AAFB3CA54EC10F0E97FD3 /* Configuration.swift */; };
 		46F7A8F51D8D5C58D35ACCC3C5A6D3EC /* Quick.h in Headers */ = {isa = PBXBuildFile; fileRef = D4E0D7E2D11371A45CB3D1221E7B4EC2 /* Quick.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4BF1B41E328E18ADF5D0E02ABF32EC0D /* NSString+QCKSelectorName.h in Headers */ = {isa = PBXBuildFile; fileRef = 64F492985EB6550A418DD3DB1BCDE146 /* NSString+QCKSelectorName.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -169,6 +171,8 @@
 		3F7190EC8380C64CD1ED48BE5A146BFF /* Pods-ZenCopy_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ZenCopy_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		407E80001C76AC8F00A9A5CB /* CopyComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyComponent.swift; sourceTree = "<group>"; };
 		40C8F6AB1C76AC3500DD750D /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		40ED95771C77BD8E00BBA1C6 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		40ED957B1C77BE8A00BBA1C6 /* NSMutableAttributedString+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Additions.swift"; sourceTree = "<group>"; };
 		40FBD52025077E5788ADCE71EF040393 /* NMBExceptionCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMBExceptionCapture.h; path = Nimble/objc/NMBExceptionCapture.h; sourceTree = "<group>"; };
 		421EED5F5437F433EAA7A35CADEA0DFA /* ZenCopy.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZenCopy.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		4930275AC98E3FD0F3BC81A7D08B8591 /* SourceLocation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SourceLocation.swift; path = Nimble/Utils/SourceLocation.swift; sourceTree = "<group>"; };
@@ -359,6 +363,14 @@
 			path = "../Target Support Files/Nimble";
 			sourceTree = "<group>";
 		};
+		40ED957A1C77BDC200BBA1C6 /* Additions */ = {
+			isa = PBXGroup;
+			children = (
+				40ED957B1C77BE8A00BBA1C6 /* NSMutableAttributedString+Additions.swift */,
+			);
+			name = Additions;
+			sourceTree = "<group>";
+		};
 		41B2E55ED845801E859813C7F5169F44 /* Pods-ZenCopy_Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,9 +496,11 @@
 		ADB0AEEC7FC2612EC39531D3448A31E5 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				40ED957A1C77BDC200BBA1C6 /* Additions */,
 				407E80001C76AC8F00A9A5CB /* CopyComponent.swift */,
 				40C8F6AB1C76AC3500DD750D /* Style.swift */,
 				1AA508F9996FE127A44FF5224D7A1F0E /* ZenCopy.swift */,
+				40ED95771C77BD8E00BBA1C6 /* Config.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -820,7 +834,9 @@
 			files = (
 				407E80011C76AC8F00A9A5CB /* CopyComponent.swift in Sources */,
 				4E6CE61EDE74BF75C02F8A134EA693FE /* ZenCopy.swift in Sources */,
+				40ED95791C77BD9500BBA1C6 /* Config.swift in Sources */,
 				40C8F6AC1C76AC3500DD750D /* Style.swift in Sources */,
+				40ED957D1C77BEDF00BBA1C6 /* NSMutableAttributedString+Additions.swift in Sources */,
 				4C2C94FC7EFF08F26283E4E546232A1F /* ZenCopy-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

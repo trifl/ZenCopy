@@ -10,9 +10,15 @@ class ViewController: UIViewController {
         let sender = "jp"
         let other = "joseph"
         
-        let attributedText = ZenCopy.manager.attributedString(key: "global.fun", args: [sender, other])
-        testLabel.attributedText = attributedText
+        let attributedText = NSMutableAttributedString(string: "Hello @linchpin")
         testLabel.numberOfLines = 0
+        
+        if let style = ZenCopy.manager.config.styles["token"] {
+            attributedText.regexFind("(@[A-Za-z0-9_]*)", setStyle: style)
+        }
+        
+        testLabel.attributedText = attributedText
+
         view.addSubview(testLabel)
     }
     
