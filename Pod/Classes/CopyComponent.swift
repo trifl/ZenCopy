@@ -18,7 +18,6 @@ public class CopyComponent: StringLiteralConvertible {
         self.value = value
         self.style = style
     }
-    
 }
 
 public extension String {

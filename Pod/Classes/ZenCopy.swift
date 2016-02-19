@@ -25,6 +25,17 @@ public class ZenCopy {
             self.copy[language] = copy()
         }
         
+        public func addCopy(language: String, prefix: String = "", copy: () -> [String:[CopyComponent]]) {
+            if self.copy[language] == nil {
+                self.copy[language] = [String:[CopyComponent]]()
+            }
+    
+            for (key, value) in copy() {
+                let modifiedKey = prefix.characters.count > 0 ? "\(prefix).\(key)" : key
+                self.copy[language]![modifiedKey] = value
+            }
+        }
+        
         public func setStyles(styles: () -> [String:Style]) {
             self.styles = styles()
         }

@@ -4,11 +4,12 @@ import Quick
 import Nimble
 import ZenCopy
 
+
 class ZenCopyTests: QuickSpec {
     override func spec() {
         let copyManager = ZenCopy.manager
         let config = ZenCopy.Config()
-                
+        
         config.setCopy("en") {
             return [
                 "test1": ["Hello world!"],
@@ -19,6 +20,13 @@ class ZenCopyTests: QuickSpec {
                 "test6": ["$0 blah blah $1"]
             ]
         }
+        
+        config.addCopy("en", prefix: "profile") {
+            return [
+                "title": ["Profile"],
+                "footer": ["Thanks!"]
+            ]
+        }
 
         config.setCopy("sp") {
             return [
@@ -26,7 +34,6 @@ class ZenCopyTests: QuickSpec {
             ]
         }
         
-        //styles
         config.setStyles {
             return [
                 "hulk": Style(color: .greenColor(), font: .systemFontOfSize(200)),
@@ -57,6 +64,12 @@ class ZenCopyTests: QuickSpec {
             }
             it("should work in english") {
                 expect(copyManager.string(key: "test6", args: ["jp", "joe"])) == "jp blah blah joe"
+            }
+            
+            context("add copy") {
+                it("works") {
+                    expect(copyManager.string(key: "profile.title")) == "Profile"
+                }
             }
         }
         
