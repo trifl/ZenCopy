@@ -1,24 +1,22 @@
-//
-//  ViewController.swift
-//  ZenCopy
-//
-//  Created by JP McGlone on 02/17/2016.
-//  Copyright (c) 2016 JP McGlone. All rights reserved.
-//
-
 import UIKit
+import ZenCopy
 
 class ViewController: UIViewController {
-
+    let testLabel = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let attributedText = ZenCopy.manager.attributedString(["Hello ".style("token"), "world!".style("hulk")])
+        testLabel.attributedText = attributedText
+        view.addSubview(testLabel)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        testLabel.sizeToFit()
+        testLabel.center = CGPointMake(view.bounds.width / 2, view.bounds.height / 2)
     }
-
 }
 
