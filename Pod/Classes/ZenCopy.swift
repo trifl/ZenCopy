@@ -50,6 +50,20 @@ public class Manager {
         self.config = config
     }
     
+    // This will ignore style
+    public func string(key key: String, args: [String] = []) -> String? {
+        guard let language = firstAvailableLanguage(key: key) else { return key }
+        guard let copyComponents = config.copy[language]?[key] else { return nil }
+        return string(copyComponents, args: args)
+    }
+    
+    // Get a styled (attributed) string from `copy`
+    public func attributedString(key key: String, args: [String] = []) -> NSAttributedString? {
+        guard let language = firstAvailableLanguage(key: key) else { return NSAttributedString(string: key) }
+        guard let copyComponents = config.copy[language]?[key] else { return nil }
+        return attributedString(copyComponents, args: args)
+    }
+    
     public func string(copyComponents: [CopyComponent], args: [String] = []) -> String {
         var string = ""
         //combine copyComponents without their style
@@ -65,8 +79,23 @@ public class Manager {
         return string
     }
     
-    // This will ignore style
-    public func string(key key: String, args: [String] = []) -> String? {            
+    // Make an attributedString on the fly with CopyComponents
+    public func attributedString(copyComponents: [CopyComponent], args: [String] = []) -> NSAttributedString {
+        let string = NSMutableAttributedString()
+        for component in copyComponents {
+            var value = component.value
+            for (index, arg) in args.enumerate() {
+                value = value.stringByReplacingOccurrencesOfString("$\(index)", withString: arg)
+            }
+            let attributes = attributesForStyle(component.style)
+            let attributedValue = NSAttributedString(string: value, attributes: attributes)
+            string.appendAttributedString(attributedValue)
+        }
+        return string
+    }
+    
+    // MARK: - Private
+    private func firstAvailableLanguage(key key: String) -> String? {
         var lang: String? = nil
         for language in config.languages {
             if let _ = config.copy[language]?[key] {
@@ -74,22 +103,14 @@ public class Manager {
                 break
             }
         }
-        
-        guard let language = lang else { return key }
-        if let copyComponents = config.copy[language]?[key] {
-            return string(copyComponents, args: args)
-        } else {
-            return nil
-        }
+        return lang
     }
     
-    // Get a styled string from `copy`
-    public func attributedString(key key: String, args: [String]? = nil) -> NSAttributedString? {
-        return NSAttributedString()
-    }
-    
-    // Make an attributedString on the fly with CopyComponents
-    public func attributedString(copyComponents: [CopyComponent]) -> NSAttributedString {
-        return NSAttributedString(string: "")
+    private func attributesForStyle(style: Style?) -> [String : AnyObject]? {
+        guard let style = style else { return nil }
+        var attributes = [String : AnyObject]()
+        attributes[NSForegroundColorAttributeName] = style.color
+        attributes[NSFontAttributeName] = style.font
+        return attributes
     }
 }
