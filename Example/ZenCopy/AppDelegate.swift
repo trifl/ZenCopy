@@ -12,14 +12,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setupZenCopy() {
+        ZenCopy.manager.config.addCopy("en", prefix: "chat") {
+            return [
+                "dance": ["@$0 dances with themself"],
+                "poke": ["@$0 ".style("token"), "pokes ".style("action"), "@$1".style("token")]
+            ]
+        }
+
         ZenCopy.manager.config.setStyles {
             return [
-                "token": Style(
-                    color: .blueColor()
+                "action": Style(
+                    color: .lightGrayColor()
                 ),
-                "hulk": Style(
-                    color: .greenColor(),
-                    font: .systemFontOfSize(30)
+                "token": Style(
+                    color: .greenColor()
                 )
             ]
         }
