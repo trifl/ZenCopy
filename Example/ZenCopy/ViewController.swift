@@ -13,7 +13,8 @@ class ViewController: UIViewController {
         let attributedText = NSMutableAttributedString(string: "Hello @linchpin")
         testLabel.numberOfLines = 0
         
-        attributedText.regexFind("(@[A-Za-z0-9_]*)", setStyle: "token")
+        let atUserRegex = "(@[A-Za-z0-9_]*)"
+        attributedText.regexFind(atUserRegex, setStyle: "token")
         
         testLabel.attributedText = attributedText
 

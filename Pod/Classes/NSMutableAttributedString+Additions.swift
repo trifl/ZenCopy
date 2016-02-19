@@ -1,11 +1,25 @@
 public extension NSMutableAttributedString {
-    func regexFind(regex: String, setStyle style: String) {
+    public func regexFind(regex: String, addStyle style: String) {
+        if let s = ZenCopy.manager.config.styles[style] {
+            regexFind(regex, addStyle: s)
+        }
+    }
+
+    public func regexFind(regex: String, addStyle style: Style) {
+        regexFind(regex, style: style, replace: false)
+    }
+    
+    public func regexFind(regex: String, setStyle style: String) {
         if let s = ZenCopy.manager.config.styles[style] {
             regexFind(regex, setStyle: s)
         }
     }
     
-    func regexFind(regex: String, setStyle style: Style) {
+    public func regexFind(regex: String, setStyle style: Style) {
+        regexFind(regex, style: style, replace: true)
+    }
+    
+    private func regexFind(regex: String, style: Style, replace: Bool) {
         do {
             let regularExpression = try NSRegularExpression(pattern: regex, options: NSRegularExpressionOptions(rawValue: 0))
             let range = NSRange(location: 0, length: self.length)
@@ -15,7 +29,11 @@ public extension NSMutableAttributedString {
                 let range = match.range
                 
                 let attributes = ZenCopy.manager.attributesForStyle(style)
-                self.setAttributes(attributes, range: range)
+                if replace {
+                    self.setAttributes(attributes, range: range)
+                } else if let attributes = attributes {
+                    self.addAttributes(attributes, range: range)
+                }
             }
         } catch _ {
             
