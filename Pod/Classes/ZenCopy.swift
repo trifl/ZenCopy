@@ -22,5 +22,40 @@ public class ZenCopy {
         public init() {
             
         }
+        
+        public func string(copyComponents: [CopyComponent], args: [String] = []) -> String {
+            var string = ""
+            //combine copyComponents without their style
+            for component in copyComponents {
+                // check for args in component
+                // TODO: this isn't very efficient. Consider an algorithm that does this in one pass, instead of n
+                var value = component.value
+                for (index, arg) in args.enumerate() {
+                    value = value.stringByReplacingOccurrencesOfString("$\(index)", withString: arg)
+                }
+                string += value
+            }
+            return string
+        }
+        
+        // This will ignore style
+        public func string(key key: String, args: [String] = []) -> String? {            
+            // TODO: languages
+            if let copyComponents = copy["en"]?[key] {
+                return string(copyComponents, args: args)
+            } else {
+                return nil
+            }
+        }
+        
+        // Get a styled string from `copy`
+        public func attributedString(key key: String, args: [String]? = nil) -> NSAttributedString? {
+            return NSAttributedString()
+        }
+        
+        // Make an attributedString on the fly with CopyComponents
+        public func attributedString(copyComponents: [CopyComponent]) -> NSAttributedString {
+            return NSAttributedString(string: "")
+        }
     }
 }

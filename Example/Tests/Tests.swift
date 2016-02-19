@@ -6,44 +6,29 @@ import ZenCopy
 
 class TableOfContentsSpec: QuickSpec {
     override func spec() {
-        describe("these will fail") {
-
-            it("can do maths") {
-                expect(1) == 2
+        let copyManager = ZenCopy.manager
+        
+        copyManager.copy["en"] = [String:[CopyComponent]]()
+        copyManager.copy["en"]!["test1"] = ["Hello world!"]
+        copyManager.copy["en"]!["test2"] = ["Hello ", "world!".style("")]
+        copyManager.copy["en"]!["test3"] = ["Hello $0!"]
+        copyManager.copy["en"]!["test4"] = ["Hello ", "$0", "!"]
+        
+        describe("ZenCopy") {
+            it("should work with key'") {
+                expect(copyManager.string(key: "test1")) == "Hello world!"
             }
-
-            it("can read") {
-                expect("number") == "string"
+            it("should work on style value with key") {
+                expect(copyManager.string(key: "test2")) == "Hello world!"
             }
-
-            it("will eventually fail") {
-                expect("time").toEventually( equal("done") )
+            it("should work on style value works with args") {
+                expect(copyManager.string(key: "test3", args: ["JP"])) == "Hello JP!"
             }
-            
-            context("these will pass") {
-
-                it("can do maths") {
-                    expect(23) == 23
-                }
-
-                it("can read") {
-                    expect("🐮") == "🐮"
-                }
-
-                it("will eventually pass") {
-                    var time = "passing"
-
-                    dispatch_async(dispatch_get_main_queue()) {
-                        time = "done"
-                    }
-
-                    waitUntil { done in
-                        NSThread.sleepForTimeInterval(0.5)
-                        expect(time) == "done"
-
-                        done()
-                    }
-                }
+            it("should work on styled value works with multiple components args") {
+                expect(copyManager.string(key: "test4", args: ["John"])) == "Hello John!"
+            }
+            it("string on the fly should work") {
+                expect(copyManager.string(["Hello $0!"], args: ["JPM"])) == "Hello JPM!"
             }
         }
     }

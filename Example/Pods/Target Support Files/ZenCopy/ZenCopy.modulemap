@@ -1,0 +1,6 @@
+framework module ZenCopy {
+  umbrella header "ZenCopy-umbrella.h"
+
+  export *
+  module * { export * }
+}
