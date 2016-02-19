@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         ZenCopy.manager.config.addCopy("sp", prefix: "global") {
             return [
-                "fun": ["$1 vee dah vee", "$0".style("action")]
+                "fun": ["$1 vee dah vee", "$0".style("action hulk")]
             ]
         }
 
@@ -41,8 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 "token": Style(
                     color: .greenColor()
                 ),
-                "darkhulk": Style (
-                    color: .blueColor(),
+                "hulk": Style (
                     fontSize: 40
                 )
             ]

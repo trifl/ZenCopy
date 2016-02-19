@@ -126,7 +126,14 @@ public class Manager {
         guard let style = style else { return nil }
 
         // if there is no size, use 12
-        let font = UIFont(name: style.fontName ?? "", size: style.fontSize ?? 12)
+        var font: UIFont!
+        let fontSize = style.fontSize ?? 12
+        if let fontName = style.fontName {
+            font = UIFont(name: fontName, size: fontSize)
+        } else {
+            font = UIFont.systemFontOfSize(fontSize)
+        }
+        
         var attributes = [String : AnyObject]()
         attributes[NSForegroundColorAttributeName] = style.color
         attributes[NSFontAttributeName] = font
