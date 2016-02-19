@@ -14,8 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setupZenCopy() {
         ZenCopy.manager.config.setStyles {
             return [
-                "token": Style(color: .greenColor()),
-                "hulk": Style(font: .systemFontOfSize(80))
+                "token": Style(
+                    color: .blueColor()
+                ),
+                "hulk": Style(
+                    color: .greenColor(),
+                    font: .systemFontOfSize(30)
+                )
             ]
         }
     }

@@ -7,7 +7,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let attributedText = ZenCopy.manager.attributedString(["Hello ".style("token hulk"), "world!".style("hulk")])
+        let attributedText = ZenCopy.manager.attributedString(["Hello ".style("hulk token"), "world!".style("hulk")])
         testLabel.attributedText = attributedText
         view.addSubview(testLabel)
     }
