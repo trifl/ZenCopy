@@ -1,4 +1,10 @@
 public extension NSMutableAttributedString {
+    func regexFind(regex: String, setStyle style: String) {
+        if let s = ZenCopy.manager.config.styles[style] {
+            regexFind(regex, setStyle: s)
+        }
+    }
+    
     func regexFind(regex: String, setStyle style: Style) {
         do {
             let regularExpression = try NSRegularExpression(pattern: regex, options: NSRegularExpressionOptions(rawValue: 0))

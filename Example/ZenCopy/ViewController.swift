@@ -13,9 +13,7 @@ class ViewController: UIViewController {
         let attributedText = NSMutableAttributedString(string: "Hello @linchpin")
         testLabel.numberOfLines = 0
         
-        if let style = ZenCopy.manager.config.styles["token"] {
-            attributedText.regexFind("(@[A-Za-z0-9_]*)", setStyle: style)
-        }
+        attributedText.regexFind("(@[A-Za-z0-9_]*)", setStyle: "token")
         
         testLabel.attributedText = attributedText
 
