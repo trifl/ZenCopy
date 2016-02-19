@@ -10,15 +10,23 @@ public class ZenCopy {
         // [language:[key:value]]
         // e.g. copy["en"]["profile.title"] = ["Hello world!"]
         // e.g. copy["en"]["profile.title"] = ["Hello ", "world!".style("token")]
-        public var copy = [String:[String:[CopyComponent]]]()
+        public private(set) var copy = [String:[String:[CopyComponent]]]()
         
         // Configure your own styles and set them here.
         // e.g. ZenCopy.manager.styles.append("header", Style(color: nil, font: UIFont(named:"something", size:14)))
         //      ZenCopy.manager.styles.append("bindleGreen", Style(color: ..., font: nil)
-        public var styles = [String:Style]()
+        public private(set) var styles = [String:Style]()
         
         public init() {
             
+        }
+        
+        public func setCopy(language: String, copy: () -> [String:[CopyComponent]]) {
+            self.copy[language] = copy()
+        }
+        
+        public func setStyles(styles: () -> [String:Style]) {
+            self.styles = styles()
         }
     }
     

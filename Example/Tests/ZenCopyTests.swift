@@ -8,21 +8,31 @@ class ZenCopyTests: QuickSpec {
     override func spec() {
         let copyManager = ZenCopy.manager
         let config = ZenCopy.Config()
-        config.copy["en"] = [String:[CopyComponent]]()
-        config.copy["en"]!["test1"] = ["Hello world!"]
-        config.copy["en"]!["test2"] = ["Hello ", "world!".style("hulk")]
-        config.copy["en"]!["test3"] = ["Hello $0!"]
-        config.copy["en"]!["test4"] = ["Hello ", "$0", "!"]
-        config.copy["en"]!["test5"] = ["@$0: ".style("token"), "hey @$1, it's me @$0"]
-        
-        config.copy["en"]!["test6"] = ["$0 blah blah $1"]
-        
-        config.copy["sp"] = [String:[CopyComponent]]()
-        config.copy["sp"]!["test6"] = ["$1 y voy $0"]
+                
+        config.setCopy("en") {
+            return [
+                "test1": ["Hello world!"],
+                "test2": ["Hello ", "world!".style("hulk")],
+                "test3": ["Hello $0!"],
+                "test4": ["Hello ", "$0", "!"],
+                "test5": ["@$0: ".style("token"), "hey @$1, it's me @$0"],
+                "test6": ["$0 blah blah $1"]
+            ]
+        }
+
+        config.setCopy("sp") {
+            return [
+                "test6": ["$1 y voy $0"]
+            ]
+        }
         
         //styles
-        config.styles["hulk"] = Style(color: .greenColor(), font: .systemFontOfSize(200))
-        config.styles["tiny"] = Style(font: .systemFontOfSize(8))
+        config.setStyles {
+            return [
+                "hulk": Style(color: .greenColor(), font: .systemFontOfSize(200)),
+                "tiny": Style(font: .systemFontOfSize(8))
+            ]
+        }
         
         copyManager.config = config
         
@@ -61,6 +71,10 @@ class ZenCopyTests: QuickSpec {
             
             it("should work in spanish") {
                 expect(copyManager.string(key: "test6", args: ["jp", "joe"])) == "joe y voy jp"
+            }
+            
+            it("should print the key if in none of the languages") {
+                expect(copyManager.string(key: "global.doesntexist", args: ["jp", "joe"])) == "global.doesntexist"
             }
         }
     }
