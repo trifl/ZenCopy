@@ -91,7 +91,15 @@ public class Manager {
             var style = component.style
             if style == nil {
                 if let styleName = component.styleName {
-                    style = config.styles[styleName]
+                    // multiple styles are possible
+                    let styleNames = styleName.componentsSeparatedByString(" ")
+                    for styleName in styleNames {
+                        if style == nil {
+                            style = config.styles[styleName]
+                        } else {
+                            style!.append(config.styles[styleName])
+                        }
+                    }
                 }
             }
 

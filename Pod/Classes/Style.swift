@@ -3,11 +3,15 @@ import Foundation
 public struct Style {
     public var color: UIColor?
     public var font: UIFont?
-    public var name: String?
     
-    public init(color: UIColor? = nil, font: UIFont? = nil, name: String? = nil) {
+    public init(color: UIColor? = nil, font: UIFont? = nil) {
         self.color = color
         self.font = font
-        self.name = name
+    }
+    
+    public mutating func append(style: Style?) {
+        guard let style = style else { return }
+        if let color = style.color { self.color = color }
+        if let font = style.font { self.font = font }
     }
 }
