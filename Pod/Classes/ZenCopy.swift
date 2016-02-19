@@ -5,7 +5,7 @@ public class ZenCopy {
         // ZenCopy will always check the languages in default order. If none pass, it will print the key.
         // It is a good idea to update this array such that the device locale is at index 0, and your default localse
         // is at the last index, though not necessary.
-        public  var languages = ["en"]
+        public var languages = ["en"]
         
         // [language:[key:value]]
         // e.g. copy["en"]["profile.title"] = ["Hello world!"]
@@ -49,8 +49,16 @@ public class ZenCopy {
         
         // This will ignore style
         public func string(key key: String, args: [String] = []) -> String? {            
-            // TODO: languages
-            if let copyComponents = config.copy["en"]?[key] {
+            var lang: String? = nil
+            for language in config.languages {
+                if let _ = config.copy[language]?[key] {
+                    lang = language
+                    break
+                }
+            }
+            
+            guard let language = lang else { return key }
+            if let copyComponents = config.copy[language]?[key] {
                 return string(copyComponents, args: args)
             } else {
                 return nil

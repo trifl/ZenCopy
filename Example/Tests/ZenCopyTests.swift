@@ -13,7 +13,12 @@ class ZenCopyTests: QuickSpec {
         config.copy["en"]!["test2"] = ["Hello ", "world!".style("hulk")]
         config.copy["en"]!["test3"] = ["Hello $0!"]
         config.copy["en"]!["test4"] = ["Hello ", "$0", "!"]
-        config.copy["en"]!["test5"] = ["@$0: hey @$1, it's me @$0"]
+        config.copy["en"]!["test5"] = ["@$0: ".style("token"), "hey @$1, it's me @$0"]
+        
+        config.copy["en"]!["test6"] = ["$0 blah blah $1"]
+        
+        config.copy["sp"] = [String:[CopyComponent]]()
+        config.copy["sp"]!["test6"] = ["$1 y voy $0"]
         
         //styles
         config.styles["hulk"] = Style(color: .greenColor(), font: .systemFontOfSize(200))
@@ -39,6 +44,23 @@ class ZenCopyTests: QuickSpec {
             }
             it("string on the fly should work") {
                 expect(copyManager.string(["Hello $0!"], args: ["JPM"])) == "Hello JPM!"
+            }
+            it("should work in english") {
+                expect(copyManager.string(key: "test6", args: ["jp", "joe"])) == "jp blah blah joe"
+            }
+        }
+        
+        describe("ZenCopy localization") {
+            beforeEach {
+                copyManager.config.languages = ["sp", "en"]
+            }
+            
+            afterEach {
+                copyManager.config.languages = ["en"]
+            }
+            
+            it("should work in spanish") {
+                expect(copyManager.string(key: "test6", args: ["jp", "joe"])) == "joe y voy jp"
             }
         }
     }
