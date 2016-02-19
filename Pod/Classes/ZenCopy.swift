@@ -124,9 +124,12 @@ public class Manager {
     
     private func attributesForStyle(style: Style?) -> [String : AnyObject]? {
         guard let style = style else { return nil }
+
+        // if there is no size, use 12
+        let font = UIFont(name: style.fontName ?? "", size: style.fontSize ?? 12)
         var attributes = [String : AnyObject]()
         attributes[NSForegroundColorAttributeName] = style.color
-        attributes[NSFontAttributeName] = style.font
+        attributes[NSFontAttributeName] = font
         return attributes
     }
 }

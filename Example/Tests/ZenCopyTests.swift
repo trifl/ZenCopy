@@ -11,8 +11,8 @@ class ZenCopyTests: QuickSpec {
         
         config.setStyles {
             return [
-                "hulk": Style(color: .greenColor(), font: .systemFontOfSize(200)),
-                "tiny": Style(font: .systemFontOfSize(8))
+                "hulk": Style(color: .greenColor(), fontSize: 200),
+                "tiny": Style(fontSize: 8)
             ]
         }
         

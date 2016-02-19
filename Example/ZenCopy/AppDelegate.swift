@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 ),
                 "darkhulk": Style (
                     color: .blueColor(),
-                    font: .systemFontOfSize(40)
+                    fontSize: 40
                 )
             ]
         }
