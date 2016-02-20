@@ -23,13 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ZenCopy.manager.config.addCopy("en", prefix: "global") {
             return [
                 "welcome": ["Welcome to ", "Bindle! ".style("token"), "Please send your feedback to ", "feedback@bindlechat.com".style("action")],
-                "fun": ["$0".style("action"), "blah dee blah $1"]
+                "fun": ["@$0 ".style("action"), "blah dee blah @$1"]
             ]
         }
         
         ZenCopy.manager.config.addCopy("sp", prefix: "global") {
             return [
-                "fun": ["$1 vee dah vee", "$0".style("action hulk")]
+                "fun": ["@$1 vee dah", "vee @$0".style("action hulk")]
             ]
         }
 

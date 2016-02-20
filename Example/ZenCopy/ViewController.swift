@@ -6,17 +6,18 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        testLabel.numberOfLines = 0
+
         let sender = "jp"
         let other = "joseph"
         
-        let attributedText = NSMutableAttributedString(string: "Hello @linchpin")
-        testLabel.numberOfLines = 0
+        let attributedText = ZenCopy.manager.attributedString(key: "global.fun", args: [sender, other])
+        let mutableAttributedString = NSMutableAttributedString(attributedString: attributedText!)
         
         let atUserRegex = "(@[A-Za-z0-9_]*)"
-        attributedText.regexFind(atUserRegex, setStyle: "token")
+        mutableAttributedString.regexFind(atUserRegex, addStyle: "token")
         
-        testLabel.attributedText = attributedText
+        testLabel.attributedText = mutableAttributedString
 
         view.addSubview(testLabel)
     }
