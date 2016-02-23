@@ -33,18 +33,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ]
         }
 
-        ZenCopy.manager.config.setStyles {
-            return [
-                "action": Style(
-                    color: .lightGrayColor()
-                ),
-                "token": Style(
-                    color: .greenColor()
-                ),
-                "hulk": Style (
-                    fontSize: 40
-                )
-            ]
+        ZenCopy.manager.config.styles = { name in
+            switch(name) {
+            case "action":
+                return Style(color: .lightGrayColor())
+            case "token":
+                return Style(color: .greenColor())
+            case "hulk":
+                return Style(fontSize: 40)
+            default:
+                return nil
+            }
         }
     }
 }

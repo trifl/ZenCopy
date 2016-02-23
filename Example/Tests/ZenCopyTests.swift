@@ -9,11 +9,15 @@ class ZenCopyTests: QuickSpec {
         let copyManager = ZenCopy.manager
         let config = ZenCopy.Config()
         
-        config.setStyles {
-            return [
-                "hulk": Style(color: .greenColor(), fontSize: 200),
-                "tiny": Style(fontSize: 8)
-            ]
+        config.styles = { name in
+            switch (name) {
+            case "hulk":
+                return Style(color: .greenColor(), fontSize: 200)
+            case "tiny":
+                return Style(fontSize: 8)
+            default:
+                return nil
+            }
         }
         
         config.setCopy("en") {
@@ -26,14 +30,14 @@ class ZenCopyTests: QuickSpec {
                 "test6": ["$0 blah blah $1"]
             ]
         }
-
+        
         config.addCopy("en", prefix: "profile") {
             return [
                 "title": ["Profile"],
                 "footer": ["Thanks!"]
             ]
         }
-
+        
         config.setCopy("sp") {
             return [
                 "test6": ["$1 y voy $0"]

@@ -58,9 +58,9 @@ public class Manager {
                     // multiple styles are possible
                     for styleName in styleNamesFromStyleString(styleName) {
                         if style == nil {
-                            style = config.styles[styleName]
+                            style = config.styles?(name: styleName)
                         } else {
-                            style!.append(config.styles[styleName])
+                            style!.append(config.styles?(name: styleName))
                         }
                     }
                 }

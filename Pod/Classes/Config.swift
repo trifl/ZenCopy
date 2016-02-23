@@ -14,7 +14,9 @@ public class Config {
     // Configure your own styles and set them here.
     // e.g. ZenCopy.manager.styles.append("header", Style(color: nil, font: UIFont(named:"something", size:14)))
     //      ZenCopy.manager.styles.append("bindleGreen", Style(color: ..., font: nil)
-    public private(set) var styles = [String:Style]()
+    private var _styles = [String:Style]()
+    
+    public var styles: ((name: String) -> Style?)?
     
     public init() {
         
@@ -35,7 +37,10 @@ public class Config {
         }
     }
     
-    public func setStyles(styles: () -> [String:Style]) {
-        self.styles = styles()
+    public func styleNamed(styleName: String) -> Style {
+        if let style = _styles[styleName] {
+            return style
+        }
+        return styles?(name: styleName) ?? Style() // TODO: default style?
     }
 }

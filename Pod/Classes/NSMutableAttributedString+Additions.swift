@@ -2,7 +2,7 @@ public extension NSMutableAttributedString {
     public func regexFind(regex: String, addStyle styleName: String) {
         var style = Style()
         for styleName in ZenCopy.manager.styleNamesFromStyleString(styleName) {
-            if let s = ZenCopy.manager.config.styles[styleName] {
+            if let s = ZenCopy.manager.config.styles?(name: styleName) {
                 style.append(s)
             }
         }
@@ -14,7 +14,7 @@ public extension NSMutableAttributedString {
     }
     
     public func regexFind(regex: String, setStyle style: String) {
-        if let s = ZenCopy.manager.config.styles[style] {
+        if let s = ZenCopy.manager.config.styles?(name: style) {
             regexFind(regex, setStyle: s)
         }
     }
