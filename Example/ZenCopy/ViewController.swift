@@ -11,11 +11,10 @@ class ViewController: UIViewController {
         let sender = "jp"
         let other = "joseph"
         
-        let attributedText = ZenCopy.manager.attributedString(key: "global.fun", args: [sender, other])
-        let mutableAttributedString = NSMutableAttributedString(attributedString: attributedText!)
+        let mutableAttributedString = NSMutableAttributedString(string: "@test says hit to @other")
         
         let atUserRegex = "(@[A-Za-z0-9_]*)"
-        mutableAttributedString.regexFind(atUserRegex, addStyle: "token")
+        mutableAttributedString.regexFind(atUserRegex, addStyle: "token hulk")
         
         testLabel.attributedText = mutableAttributedString
 

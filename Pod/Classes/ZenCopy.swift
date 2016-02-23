@@ -39,6 +39,10 @@ public class Manager {
         return string
     }
     
+    internal func styleNamesFromStyleString(styleString: String) -> [String] {
+        return styleString.componentsSeparatedByString(" ")
+    }
+    
     // Make an attributedString on the fly with CopyComponents
     public func attributedString(copyComponents: [CopyComponent], args: [String] = []) -> NSAttributedString {
         let string = NSMutableAttributedString()
@@ -52,8 +56,7 @@ public class Manager {
             if style == nil {
                 if let styleName = component.styleName {
                     // multiple styles are possible
-                    let styleNames = styleName.componentsSeparatedByString(" ")
-                    for styleName in styleNames {
+                    for styleName in styleNamesFromStyleString(styleName) {
                         if style == nil {
                             style = config.styles[styleName]
                         } else {
