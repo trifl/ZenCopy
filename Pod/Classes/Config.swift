@@ -9,32 +9,17 @@ public class Config {
     // [language:[key:value]]
     // e.g. copy["en"]["profile.title"] = ["Hello world!"]
     // e.g. copy["en"]["profile.title"] = ["Hello ", "world!".style("token")]
-    public private(set) var copy = [String:[String:[CopyComponent]]]()
+    internal var _copy = [String:[String:[CopyComponent]]]()
+    public var copy: ((locale: String, key: String) -> [CopyComponent]?)?
     
     // Configure your own styles and set them here.
     // e.g. ZenCopy.manager.styles.append("header", Style(color: nil, font: UIFont(named:"something", size:14)))
     //      ZenCopy.manager.styles.append("bindleGreen", Style(color: ..., font: nil)
     private var _styles = [String:Style]()
-    
     public var styles: ((name: String) -> Style?)?
     
     public init() {
         
-    }
-    
-    public func setCopy(language: String, copy: () -> [String:[CopyComponent]]) {
-        self.copy[language] = copy()
-    }
-    
-    public func addCopy(language: String, prefix: String = "", copy: () -> [String:[CopyComponent]]) {
-        if self.copy[language] == nil {
-            self.copy[language] = [String:[CopyComponent]]()
-        }
-        
-        for (key, value) in copy() {
-            let modifiedKey = prefix.characters.count > 0 ? "\(prefix).\(key)" : key
-            self.copy[language]![modifiedKey] = value
-        }
     }
     
     public func styleNamed(styleName: String) -> Style {

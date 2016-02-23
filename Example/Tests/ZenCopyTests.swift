@@ -20,28 +20,38 @@ class ZenCopyTests: QuickSpec {
             }
         }
         
-        config.setCopy("en") {
-            return [
-                "test1": ["Hello world!"],
-                "test2": ["Hello ", "world!".style("hulk")],
-                "test3": ["Hello $0!"],
-                "test4": ["Hello ", "$0", "!"],
-                "test5": ["@$0: ".style("token"), "hey @$1, it's me @$0"],
-                "test6": ["$0 blah blah $1"]
-            ]
-        }
-        
-        config.addCopy("en", prefix: "profile") {
-            return [
-                "title": ["Profile"],
-                "footer": ["Thanks!"]
-            ]
-        }
-        
-        config.setCopy("sp") {
-            return [
-                "test6": ["$1 y voy $0"]
-            ]
+        config.copy = { locale, key in
+            switch (locale) {
+            case "en":
+                switch (key) {
+                case "test1":
+                    return ["Hello world!"]
+                case "test2":
+                    return ["Hello ", "world!".style("hulk")]
+                case "test3":
+                    return ["Hello $0!"]
+                case "test4":
+                    return ["Hello ", "$0", "!"]
+                case "test5":
+                    return ["@$0: ".style("token"), "hey @$1, it's me @$0"]
+                case "test6":
+                    return ["$0 blah blah $1"]
+                case "profile.title":
+                    return ["Profile"]
+                case "profile.footer":
+                    return ["Thanks!"]
+                default:
+                    return nil
+                }
+            case "sp":
+                switch (key) {
+                case "test6": return ["$1 y voy $0"]
+                default:
+                    return nil
+                }
+            default:
+                return nil
+            }
         }
         
         copyManager.config = config

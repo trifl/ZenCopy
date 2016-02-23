@@ -13,14 +13,14 @@ public class Manager {
     // This will ignore style
     public func string(key key: String, args: [String] = []) -> String? {
         guard let language = firstAvailableLanguage(key: key) else { return key }
-        guard let copyComponents = config.copy[language]?[key] else { return nil }
+        guard let copyComponents = config._copy[language]?[key] ?? config.copy?(locale: language, key: key) else { return nil }
         return string(copyComponents, args: args)
     }
     
     // Get a styled (attributed) string from `copy`
     public func attributedString(key key: String, args: [String] = []) -> NSAttributedString? {
         guard let language = firstAvailableLanguage(key: key) else { return NSAttributedString(string: key) }
-        guard let copyComponents = config.copy[language]?[key] else { return nil }
+        guard let copyComponents = config._copy[language]?[key] ?? config.copy?(locale: language, key: key) else { return nil }
         return attributedString(copyComponents, args: args)
     }
     
@@ -77,7 +77,7 @@ public class Manager {
     private func firstAvailableLanguage(key key: String) -> String? {
         var lang: String? = nil
         for language in config.languages {
-            if let _ = config.copy[language]?[key] {
+            if let _ = config._copy[language]?[key] ?? config.copy?(locale: language, key: key) {
                 lang = language
                 break
             }
