@@ -8,9 +8,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         testLabel.numberOfLines = 0
 
-        let sender = "jp"
-        let other = "joseph"
-        
         let mutableAttributedString = NSMutableAttributedString(string: "@test says hit to @other")
         
         let atUserRegex = "(@[A-Za-z0-9_]*)"

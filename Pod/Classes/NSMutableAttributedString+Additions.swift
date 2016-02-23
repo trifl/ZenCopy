@@ -1,6 +1,6 @@
 public extension NSMutableAttributedString {
     public func regexFind(regex: String, addStyle styleName: String) {
-        var style = Style()
+        let style = Style()
         for styleName in ZenCopy.manager.styleNamesFromStyleString(styleName) {
             if let s = ZenCopy.manager.config.styles?(name: styleName) {
                 style.append(s)
