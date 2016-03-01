@@ -11,8 +11,10 @@ class ViewController: UIViewController {
         let mutableAttributedString = NSMutableAttributedString(string: "@test says hit to @other")
         
         let atUserRegex = "(@[A-Za-z0-9_]*)"
-        mutableAttributedString.regexFind(atUserRegex, addStyle: "Username") { match in
-            print(match)
+        if let matches = mutableAttributedString.regexFind(atUserRegex, addStyle: "Username") {
+            for match in matches {
+                print(match)
+            }
         }
         
         testLabel.attributedText = mutableAttributedString
