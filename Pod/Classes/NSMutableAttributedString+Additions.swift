@@ -1,29 +1,29 @@
 public extension NSMutableAttributedString {
-    public func regexFind(regex: String, addStyle styleName: String) {
+    public func regexFind(regex: String, addStyle styleName: String, enumerate: ((match: NSTextCheckingResult) -> ())? = nil) {
         let style = Style()
         for styleName in ZenCopy.manager.styleNamesFromStyleString(styleName) {
             if let s = ZenCopy.manager.config.styles?(name: styleName) {
                 style.append(s)
             }
         }
-        regexFind(regex, addStyle: style)
+        regexFind(regex, addStyle: style, enumerate: enumerate)
     }
     
-    public func regexFind(regex: String, addStyle style: Style) {
-        regexFind(regex, style: style, replace: false)
+    public func regexFind(regex: String, addStyle style: Style, enumerate: ((match: NSTextCheckingResult) -> ())? = nil) {
+        regexFind(regex, style: style, replace: false, enumerate: enumerate)
     }
     
-    public func regexFind(regex: String, setStyle style: String) {
+    public func regexFind(regex: String, setStyle style: String, enumerate: ((match: NSTextCheckingResult) -> ())? = nil) {
         if let s = ZenCopy.manager.config.styles?(name: style) {
-            regexFind(regex, setStyle: s)
+            regexFind(regex, setStyle: s, enumerate: enumerate)
         }
     }
     
-    public func regexFind(regex: String, setStyle style: Style) {
-        regexFind(regex, style: style, replace: true)
+    public func regexFind(regex: String, setStyle style: Style, enumerate: ((match: NSTextCheckingResult) -> ())? = nil) {
+        regexFind(regex, style: style, replace: true, enumerate: enumerate)
     }
     
-    private func regexFind(regex: String, style: Style, replace: Bool) {
+    private func regexFind(regex: String, style: Style, replace: Bool, enumerate: ((match: NSTextCheckingResult) -> ())? = nil) {
         do {
             let regularExpression = try NSRegularExpression(pattern: regex, options: NSRegularExpressionOptions(rawValue: 0))
             let range = NSRange(location: 0, length: self.length)
@@ -38,6 +38,7 @@ public extension NSMutableAttributedString {
                 } else if let attributes = attributes {
                     self.addAttributes(attributes, range: range)
                 }
+                enumerate?(match: match)
             }
         } catch _ {
             
