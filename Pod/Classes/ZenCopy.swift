@@ -99,7 +99,19 @@ public class Manager {
         
         var attributes = [String : AnyObject]()
         attributes[NSForegroundColorAttributeName] = style.color
+        
+        if let color = style.color, alpha = style.alpha {
+            attributes[NSForegroundColorAttributeName] = color.colorWithAlphaComponent(alpha)
+        }
+        
         attributes[NSFontAttributeName] = font
+        
+        if let underline = style.underline where underline {
+            attributes[NSUnderlineStyleAttributeName] = NSUnderlineStyle.StyleSingle.rawValue
+        } else {
+            attributes[NSUnderlineStyleAttributeName] = nil
+        }
+        
         return attributes
     }
 }

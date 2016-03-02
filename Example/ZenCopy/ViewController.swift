@@ -11,13 +11,13 @@ class ViewController: UIViewController {
         let mutableAttributedString = NSMutableAttributedString(string: "@test says hit to @other")
         
         let atUserRegex = "(@[A-Za-z0-9_]*)"
-        if let matches = mutableAttributedString.regexFind(atUserRegex, addStyle: "Username") {
+        if let matches = mutableAttributedString.regexFind(atUserRegex, addStyle: "Username underline") {
             for match in matches {
                 print(match)
             }
         }
         
-        testLabel.attributedText = mutableAttributedString
+        testLabel.attributedText = ZenCopy.manager.attributedString(["Test".style("token ghost"), " it out".style("token")])
 
         view.addSubview(testLabel)
     }

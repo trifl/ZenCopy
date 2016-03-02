@@ -31,6 +31,7 @@
 		3AEAC447B09E7AABC140654C8529BC94 /* MatcherFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43EEEBE209F0CF242FBC231937E6922 /* MatcherFunc.swift */; };
 		3E78A1C052CD01C05867C853A7D555FE /* Pods-ZenCopy_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C1D4DD72B2DE3FCB1AC42264A98873F4 /* Pods-ZenCopy_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		407E80011C76AC8F00A9A5CB /* CopyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407E80001C76AC8F00A9A5CB /* CopyComponent.swift */; };
+		40A3D9F51C86709100AA116A /* String+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A3D9F41C86709100AA116A /* String+Additions.swift */; };
 		40C8F6AC1C76AC3500DD750D /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8F6AB1C76AC3500DD750D /* Style.swift */; };
 		40ED95791C77BD9500BBA1C6 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED95771C77BD8E00BBA1C6 /* Config.swift */; };
 		40ED957D1C77BEDF00BBA1C6 /* NSMutableAttributedString+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40ED957B1C77BE8A00BBA1C6 /* NSMutableAttributedString+Additions.swift */; };
@@ -170,6 +171,7 @@
 		3F1975D001BFB447009180BAF8C14ADB /* Quick-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Quick-prefix.pch"; sourceTree = "<group>"; };
 		3F7190EC8380C64CD1ED48BE5A146BFF /* Pods-ZenCopy_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ZenCopy_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		407E80001C76AC8F00A9A5CB /* CopyComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyComponent.swift; sourceTree = "<group>"; };
+		40A3D9F41C86709100AA116A /* String+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Additions.swift"; sourceTree = "<group>"; };
 		40C8F6AB1C76AC3500DD750D /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		40ED95771C77BD8E00BBA1C6 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		40ED957B1C77BE8A00BBA1C6 /* NSMutableAttributedString+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Additions.swift"; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				40ED957B1C77BE8A00BBA1C6 /* NSMutableAttributedString+Additions.swift */,
+				40A3D9F41C86709100AA116A /* String+Additions.swift */,
 			);
 			name = Additions;
 			sourceTree = "<group>";
@@ -832,6 +835,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40A3D9F51C86709100AA116A /* String+Additions.swift in Sources */,
 				407E80011C76AC8F00A9A5CB /* CopyComponent.swift in Sources */,
 				4E6CE61EDE74BF75C02F8A134EA693FE /* ZenCopy.swift in Sources */,
 				40ED95791C77BD9500BBA1C6 /* Config.swift in Sources */,

@@ -56,6 +56,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return Style(color: .blueColor())
             case "large":
                 return Style(fontSize: 40)
+            case "underline":
+                return Style(underline: true)
+            case "ghost":
+                return Style(alpha: 0.5)
             case "Username":
                 return "token large"
             default:
