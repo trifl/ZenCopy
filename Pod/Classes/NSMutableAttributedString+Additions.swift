@@ -22,7 +22,7 @@ public extension NSMutableAttributedString {
                 style.append(s)
             }
         }
-        return nil
+        return self.setStyle(style, regex: regex)
     }
     
     public func setStyle(style: Style, regex: String) -> [NSTextCheckingResult]? {
