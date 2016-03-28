@@ -1,30 +1,36 @@
 public extension NSMutableAttributedString {
-    public func regexFind(regex: String, addStyle styleName: String) -> [NSTextCheckingResult]? {
+    // Add style
+    public func addStyle(named styleName: String, regex: String) -> [NSTextCheckingResult]? {
         let style = Style()
         for styleName in ZenCopy.manager.styleNamesFromStyleString(styleName) {
             if let s = ZenCopy.manager.config.styles?(name: styleName) {
                 style.append(s)
             }
         }
-        return regexFind(regex, addStyle: style)
+        return addStyle(style, regex: regex)
     }
     
-    public func regexFind(regex: String, addStyle style: Style) -> [NSTextCheckingResult]? {
-        return regexFind(regex, style: style, replace: false)
+    public func addStyle(style: Style, regex: String) -> [NSTextCheckingResult]? {
+        return self.style(style, regex: regex, replace: false)
     }
     
-    public func regexFind(regex: String, setStyle style: String) -> [NSTextCheckingResult]? {
-        if let s = ZenCopy.manager.config.styles?(name: style) {
-            return regexFind(regex, setStyle: s)
+    // Set (replace) style
+    public func setStyle(named styleName: String, regex: String) -> [NSTextCheckingResult]? {
+        let style = Style()
+        for styleName in ZenCopy.manager.styleNamesFromStyleString(styleName) {
+            if let s = ZenCopy.manager.config.styles?(name: styleName) {
+                style.append(s)
+            }
         }
         return nil
     }
     
-    public func regexFind(regex: String, setStyle style: Style) -> [NSTextCheckingResult]? {
-        return regexFind(regex, style: style, replace: true)
+    public func setStyle(style: Style, regex: String) -> [NSTextCheckingResult]? {
+        return self.style(style, regex: regex, replace: true)
     }
     
-    private func regexFind(regex: String, style: Style, replace: Bool) -> [NSTextCheckingResult]? {
+    // MARK: - Private
+    private func style(style: Style, regex: String, replace: Bool) -> [NSTextCheckingResult]? {
         do {
             let regularExpression = try NSRegularExpression(pattern: regex, options: NSRegularExpressionOptions(rawValue: 0))
             let range = NSRange(location: 0, length: self.length)

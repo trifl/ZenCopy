@@ -6,7 +6,6 @@ import ZenCopy
 
 class ZenCopyTests: QuickSpec {
     override func spec() {
-        let copyManager = ZenCopy.manager
         let config = ZenCopy.Config()
         
         config.styles = { name in
@@ -54,8 +53,8 @@ class ZenCopyTests: QuickSpec {
             }
         }
         
-        copyManager.config = config
-        
+        let copyManager = ZenCopy.Manager(config: config)
+
         describe("ZenCopy") {
             it("should work with key'") {
                 expect(copyManager.string(key: "test1")) == "Hello world!"

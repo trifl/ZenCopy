@@ -11,7 +11,7 @@ class ViewController: UIViewController {
         let mutableAttributedString = NSMutableAttributedString(string: "@test says hit to @other")
         
         let atUserRegex = "(@[A-Za-z0-9_]*)"
-        if let matches = mutableAttributedString.regexFind(atUserRegex, addStyle: "Username underline") {
+        if let matches = mutableAttributedString.setStyle(named: "Username underline", regex: atUserRegex) {
             for match in matches {
                 print(match)
             }
