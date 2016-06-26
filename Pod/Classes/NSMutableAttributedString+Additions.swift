@@ -1,8 +1,8 @@
 public extension NSMutableAttributedString {
     // Add style
-    public func addStyle(named styleName: String, regex: String) -> [NSTextCheckingResult]? {
+    public func addStyle(name: String, regex: String) -> [NSTextCheckingResult]? {
         let style = Style()
-        for styleName in ZenCopy.manager.styleNamesFromStyleString(styleName) {
+        for styleName in ZenCopy.manager.names(fromStyleString: name) {
             if let s = ZenCopy.manager.config.styles?(name: styleName) {
                 style.append(s)
             }
@@ -15,9 +15,9 @@ public extension NSMutableAttributedString {
     }
     
     // Set (replace) style
-    public func setStyle(named styleName: String, regex: String, tokenized: Bool = true) -> [NSTextCheckingResult]? {
+    public func setStyle(named name: String, regex: String, tokenized: Bool = true) -> [NSTextCheckingResult]? {
         let style = Style()
-        for styleName in ZenCopy.manager.styleNamesFromStyleString(styleName) {
+        for styleName in ZenCopy.manager.names(fromStyleString: name) {
             if let s = ZenCopy.manager.config.styles?(name: styleName) {
                 style.append(s)
             }

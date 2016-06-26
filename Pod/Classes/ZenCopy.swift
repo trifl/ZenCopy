@@ -39,7 +39,7 @@ public class Manager {
         return string
     }
     
-    internal func styleNamesFromStyleString(styleString: String) -> [String] {
+    internal func styleNames(fromStyleString styleString: String) -> [String] {
         return styleString.componentsSeparatedByString(" ")
     }
     
@@ -54,9 +54,9 @@ public class Manager {
             
             var style = component.style
             if style == nil {
-                if let styleName = component.styleName {
+                if let styleName = component.name {
                     // multiple styles are possible
-                    for styleName in styleNamesFromStyleString(styleName) {
+                    for styleName in styleNames(fromStyleString: styleName) {
                         if style == nil {
                             style = config.styles?(name: styleName)
                         } else {

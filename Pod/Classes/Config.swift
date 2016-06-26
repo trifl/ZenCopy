@@ -22,10 +22,10 @@ public class Config {
         
     }
     
-    public func styleNamed(styleName: String) -> Style {
-        if let style = _styles[styleName] {
+    public func style(name: String) -> Style {
+        if let style = _styles[name] {
             return style
         }
-        return styles?(name: styleName) ?? Style() // TODO: default style?
+        return styles?(name: name) ?? Style() // TODO: default style?
     }
 }

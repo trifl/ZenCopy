@@ -8,7 +8,7 @@ public class Style: StringLiteralConvertible {
     public var alpha: CGFloat?
     
     public required init(stringLiteral value: String) {
-        for styleName in ZenCopy.manager.styleNamesFromStyleString(value) {
+        for styleName in ZenCopy.manager.styleNames(fromStyleString: value) {
             if let style = styleName.style() {
                 append(style)
             }
@@ -16,7 +16,7 @@ public class Style: StringLiteralConvertible {
     }
     
     public required init(extendedGraphemeClusterLiteral value: String) {
-        for styleName in ZenCopy.manager.styleNamesFromStyleString(value) {
+        for styleName in ZenCopy.manager.styleNames(fromStyleString: value) {
             if let style = styleName.style() {
                 append(style)
             }
@@ -24,7 +24,7 @@ public class Style: StringLiteralConvertible {
     }
     
     public required init(unicodeScalarLiteral value: String) {
-        for styleName in ZenCopy.manager.styleNamesFromStyleString(value) {
+        for styleName in ZenCopy.manager.styleNames(fromStyleString: value) {
             if let style = styleName.style() {
                 append(style)
             }
