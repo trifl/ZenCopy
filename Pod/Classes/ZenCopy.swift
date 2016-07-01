@@ -65,7 +65,7 @@ public class Manager {
                     }
                 }
             }
-
+            
             let attributes = attributesForStyle(style)
             let attributedValue = NSAttributedString(string: value, attributes: attributes)
             string.appendAttributedString(attributedValue)
@@ -87,7 +87,7 @@ public class Manager {
     
     internal func attributesForStyle(style: Style?) -> [String : AnyObject]? {
         guard let style = style else { return nil }
-
+        
         // if there is no size, use 12
         var font: UIFont!
         let fontSize = style.fontSize ?? 12
@@ -111,6 +111,10 @@ public class Manager {
         } else {
             attributes[NSUnderlineStyleAttributeName] = nil
         }
+        
+        attributes[NSBackgroundColorAttributeName] = style.backgroundColor
+        // For TTTLabel support
+        attributes["TTTBackgroundFillColor"] = style.backgroundColor?.CGColor
         
         return attributes
     }

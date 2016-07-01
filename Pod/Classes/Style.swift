@@ -6,6 +6,7 @@ public class Style: StringLiteralConvertible {
     public var fontSize: CGFloat?
     public var underline: Bool?
     public var alpha: CGFloat?
+    public var backgroundColor: UIColor?
     
     public required init(stringLiteral value: String) {
         for styleName in ZenCopy.manager.styleNamesFromStyleString(value) {
@@ -31,12 +32,13 @@ public class Style: StringLiteralConvertible {
         }
     }
     
-    public init(color: UIColor? = nil, fontName: String? = nil, fontSize: CGFloat? = nil, underline: Bool? = nil, alpha: CGFloat? = nil) {
+    public init(color: UIColor? = nil, fontName: String? = nil, fontSize: CGFloat? = nil, underline: Bool? = nil, alpha: CGFloat? = nil, backgroundColor: UIColor? = nil) {
         self.color = color
         self.fontName = fontName
         self.fontSize = fontSize
         self.underline = underline
         self.alpha = alpha
+        self.backgroundColor = backgroundColor
     }
     
     public func append(style: Style?) {
@@ -46,5 +48,6 @@ public class Style: StringLiteralConvertible {
         if let fontSize = style.fontSize { self.fontSize = fontSize }
         if let alpha = style.alpha { self.alpha = alpha }
         if let underline = style.underline { self.underline = underline }
+        if let backgroundColor = style.backgroundColor { self.backgroundColor = backgroundColor }
     }
 }
